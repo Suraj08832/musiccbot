@@ -24,8 +24,8 @@ A feature-rich Telegram music bot for playing music in group voice chats.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/sandeephere08/ZEFMUSIC.git
-cd ZEFMUSIC
+git clone https://github.com/Suraj08832/musiccbot.git
+cd musiccbot
 ```
 
 2. Install the requirements:
