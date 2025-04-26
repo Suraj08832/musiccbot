@@ -35,16 +35,14 @@ LOGGER_ID = int(getenv("LOGGER_ID", "-1002605198416"))
 OWNER_ID = int(getenv("OWNER_ID", "7694579428"))
 
 # Sudo users
-SUDO_USERS = list(map(int, os.getenv("SUDO_USERS", "7672710416").split()))
+SUDO_USERS = list(map(int, getenv("SUDO_USERS", "7672710416").split()))
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
     "https://github.com/sandeephere08/ZEFMUSIC"
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
-GIT_TOKEN = getenv(
-    "GIT_TOKEN", None
-)  # Fill this variable if your upstream repository is private
+GIT_TOKEN = getenv("GIT_TOKEN", None)
 
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/ZEFRONAssociation")
 SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/zefronmusic")
@@ -66,7 +64,6 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 # Get your pyrogram v2 session from @BRANDEDSTRINGSESSION_BOT on Telegram
 STRING1 = getenv("STRING_SESSION", "BQCwPbsAH5Yh_Pb4-L7Rrcv7lA9AhhYsV9J9uR2aa_pnNPwfh-1Ka_VMGhCsNDNKOsLdgoR3aZzaQ9rO24edu9VgwdwoeQXpYHQpu3CreiD_KnNrN7bF5zRGOXVTARBr9jsw3rb3YQiFdsul3iloa7d6fyFrmVoBRgVnAgl3CSoKF3a2tPsiV9JG3azmA11Abavj45oC5dbNKDYQOoon68kZJGomrrcH4XDDLAZ2m2Ej74fGDxNfd8h_aLJ6R8NZhvr70T6r3z06zMTKZiDanhsEtUeBRGjy6O1pAH-SIOWF-NMY0Re6_tXgux07UcBHKEaR6B7GYf2S8a8DTDIPGaiB_W7J-AAAAAHKofbkAA")
 STRING2 = getenv("STRING_SESSION2", "BQGsDvwAipQwqj77csuHXsBUY-ihwtz4wSrCAuP_W7KMw7wOZ-llAPR1IBO8YTyE4mLQrMRJO4NosWIMNlH4bzR9XM5wdf_BBk0CMtuu2rXCKeWz3NhKvYjHzn4q3FamocFoVfJyBe37JCAz-SePf_SQ8Y1aUTpR9bz7uTLQS3_Z8L5mQMGF5w3v6UZ7xFiEVtHN0I5ZllShukYagntuTSRK6KSEvBSfSJ96G0tU8f_LLHDZYpBq9ibDu46LkMrYo8UOE7Nn4VOnl9As4tmFxuPQa_ioOo7oIzLKzFoxc6ytwSAmgANLduE7CSWidlurZyDvpQuTSB8xixO4BMT7RU5cD28l0gAAAAHmg7_MAA")
-")
 STRING3 = getenv("STRING_SESSION3", None)
 STRING4 = getenv("STRING_SESSION4", None)
 STRING5 = getenv("STRING_SESSION5", None)
@@ -101,14 +98,19 @@ def time_to_seconds(time):
 
 DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
 
-if SUPPORT_CHANNEL:
-    if not re.match("(?:http|https)://", SUPPORT_CHANNEL):
-        raise SystemExit(
-            "[ERROR] - Your SUPPORT_CHANNEL url is wrong. Please ensure that it starts with https://"
-        )
+def validate_url(url):
+    if not url:
+        return True
+    if not re.match("(?:http|https)://", url):
+        return False
+    return True
 
-if SUPPORT_CHAT:
-    if not re.match("(?:http|https)://", SUPPORT_CHAT):
-        raise SystemExit(
-            "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
-        )
+if not validate_url(SUPPORT_CHANNEL):
+    raise SystemExit(
+        "[ERROR] - Your SUPPORT_CHANNEL url is wrong. Please ensure that it starts with https://"
+    )
+
+if not validate_url(SUPPORT_CHAT):
+    raise SystemExit(
+        "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
+    )
