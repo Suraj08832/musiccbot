@@ -1,5 +1,27 @@
 import sys
 import os
+import logging
+from config import BOT_USERNAME, OWNER_ID
+from datetime import datetime
+from logging.handlers import RotatingFileHandler
+import time
+
+# Initialize logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        RotatingFileHandler(
+            "zefmusic.log", maxBytes=50000000, backupCount=10
+        ),
+        logging.StreamHandler(),
+    ],
+)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+LOGGER = logging.getLogger(__name__)
+
+# Bot start time
+bot_start_time = time.time()
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -16,7 +38,13 @@ from ZEFMUSIC.misc import dbb
 from .logging import LOGGER
 
 dirr()
-git()
+
+try:
+    git()
+except ImportError:
+    git = None
+    LOGGER.warning("Git module not found. Some features may be limited.")
+
 dbb()
 
 app = KINGBot()

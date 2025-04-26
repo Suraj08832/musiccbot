@@ -1,9 +1,15 @@
 import asyncio
 import shlex
 from typing import Tuple
+import os
+import sys
+from config import UPSTREAM_REPO, UPSTREAM_BRANCH
 
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
+try:
+    from git import Repo
+    git = True
+except ImportError:
+    git = False
 
 import config
 
@@ -28,6 +34,52 @@ def install_req(cmd: str) -> Tuple[str, str, int, int]:
 
     return asyncio.get_event_loop().run_until_complete(install_requirements())
 
+
+def get_git_repo():
+    if not git:
+        return None
+    
+    try:
+        repo = Repo()
+        return repo
+    except:
+        return None
+
+def get_git_remote():
+    if not git:
+        return None
+    
+    try:
+        repo = get_git_repo()
+        if repo:
+            return repo.remote("origin")
+        return None
+    except:
+        return None
+
+def get_git_branch():
+    if not git:
+        return None
+    
+    try:
+        repo = get_git_repo()
+        if repo:
+            return repo.active_branch.name
+        return None
+    except:
+        return None
+
+def get_git_commit():
+    if not git:
+        return None
+    
+    try:
+        repo = get_git_repo()
+        if repo:
+            return repo.head.commit.hexsha
+        return None
+    except:
+        return None
 
 def git():
     REPO_LINK = config.UPSTREAM_REPO
