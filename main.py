@@ -7,9 +7,13 @@ from pytgcalls import PyTgCalls
 from pytgcalls.types import Update
 from pytgcalls.types.input_stream import AudioPiped
 import yt_dlp
+from keep_alive import keep_alive
 
 # Load environment variables
 load_dotenv()
+
+# Start keep alive server
+keep_alive()
 
 # Initialize the bot
 bot = Client(
