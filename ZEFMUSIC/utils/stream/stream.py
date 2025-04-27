@@ -46,7 +46,9 @@ async def stream(
                     duration_sec,
                     thumbnail,
                     vidid,
-                ) = await YouTube.details(search, False if spotify else True)
+                ) = await YouTube.details(
+                    search["vidid"], True if spotify else None
+                )
             except:
                 continue
             if str(duration_min) == "None":
@@ -67,7 +69,7 @@ async def stream(
                 )
                 position = len(db.get(chat_id)) - 1
                 count += 1
-                msg += f"{count}. {title[:70]}\n"
+                msg += f"{count}- {title[:70]}\n"
                 msg += f"{_['play_20']} {position}\n\n"
             else:
                 if not forceplay:
@@ -80,34 +82,27 @@ async def stream(
                 except:
                     raise AssistantErr(_["play_14"])
                 await KING.join_call(
-                    chat_id,
-                    original_chat_id,
-                    file_path,
-                    video=status,
-                    image=thumbnail,
+                    chat_id, original_chat_id, file_path, video=status, image=thumbnail
                 )
                 await put_queue(
                     chat_id,
                     original_chat_id,
-                    file_path if direct else f"vid_{vidid}",
+                    "direct",
                     title,
                     duration_min,
                     user_name,
                     vidid,
                     user_id,
                     "video" if video else "audio",
-                    forceplay=forceplay,
                 )
                 img = await get_thumb(vidid)
-                button = stream_markup(_, chat_id)
+                button = stream_markup(_, vidid, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        f"https://t.me/{app.username}?start=info_{vidid}",
-                        title[:23],
-                        duration_min,
                         user_name,
+                        f"https://t.me/{app.username}?start=info_{vidid}",
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -122,20 +117,21 @@ async def stream(
                 car = os.linesep.join(msg.split(os.linesep)[:17])
             else:
                 car = msg
-            carbon = await Carbon.generate(car, randint(100, 10000000))
-            upl = close_markup(_)
-            return await app.send_photo(
+            carbon = await Carbon.generate(
+                car, randint(100, 10000000)
+            )
+            await app.send_photo(
                 original_chat_id,
                 photo=carbon,
-                caption=_["play_21"].format(position, link),
-                reply_markup=upl,
+                caption=_["play_21"].format(link, position),
+                reply_markup=InlineKeyboardMarkup(button),
             )
+            return run
     elif streamtype == "youtube":
         link = result["link"]
         vidid = result["vidid"]
         title = (result["title"]).title()
         duration_min = result["duration_min"]
-        thumbnail = result["thumb"]
         status = True if video else None
         try:
             file_path, direct = await YouTube.download(
@@ -147,7 +143,7 @@ async def stream(
             await put_queue(
                 chat_id,
                 original_chat_id,
-                file_path if direct else f"vid_{vidid}",
+                "direct",
                 title,
                 duration_min,
                 user_name,
@@ -156,49 +152,41 @@ async def stream(
                 "video" if video else "audio",
             )
             position = len(db.get(chat_id)) - 1
-            button = aq_markup(_, chat_id)
             await app.send_message(
-                chat_id=original_chat_id,
-                text=_["queue_4"].format(position, title[:27], duration_min, user_name),
-                reply_markup=InlineKeyboardMarkup(button),
+                original_chat_id,
+                _["play_20"].format(position),
             )
         else:
             if not forceplay:
                 db[chat_id] = []
             await KING.join_call(
-                chat_id,
-                original_chat_id,
-                file_path,
-                video=status,
-                image=thumbnail,
+                chat_id, original_chat_id, file_path, video=status, image=thumbnail
             )
             await put_queue(
                 chat_id,
                 original_chat_id,
-                file_path if direct else f"vid_{vidid}",
+                "direct",
                 title,
                 duration_min,
                 user_name,
                 vidid,
                 user_id,
                 "video" if video else "audio",
-                forceplay=forceplay,
             )
+            button = stream_markup(_, vidid, chat_id)
             img = await get_thumb(vidid)
-            button = stream_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
                 photo=img,
                 caption=_["stream_1"].format(
-                    f"https://t.me/{app.username}?start=info_{vidid}",
-                    title[:23],
-                    duration_min,
                     user_name,
+                    f"https://t.me/{app.username}?start=info_{vidid}",
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
             db[chat_id][0]["mystic"] = run
             db[chat_id][0]["markup"] = "stream"
+            return run
     elif streamtype == "soundcloud":
         file_path = result["filepath"]
         title = result["title"]

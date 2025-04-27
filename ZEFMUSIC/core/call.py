@@ -5,7 +5,7 @@ from typing import Union
 
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
-from pytgcalls import PyTgCalls, StreamType
+from pytgcalls import PyTgCalls, StreamType, StreamMode
 from pytgcalls.exceptions import (
     AlreadyJoinedError,
     NoActiveGroupCall,
@@ -59,6 +59,8 @@ class Call(PyTgCalls):
         self.one = PyTgCalls(
             self.userbot1,
             cache_duration=100,
+            stream_quality=HighQualityAudio(),
+            stream_mode=StreamMode().pulse_stream,
         )
         self.userbot2 = Client(
             name="AnonXAss2",
@@ -69,6 +71,8 @@ class Call(PyTgCalls):
         self.two = PyTgCalls(
             self.userbot2,
             cache_duration=100,
+            stream_quality=HighQualityAudio(),
+            stream_mode=StreamMode().pulse_stream,
         )
         self.userbot3 = Client(
             name="AnonXAss3",
@@ -79,6 +83,8 @@ class Call(PyTgCalls):
         self.three = PyTgCalls(
             self.userbot3,
             cache_duration=100,
+            stream_quality=HighQualityAudio(),
+            stream_mode=StreamMode().pulse_stream,
         )
         self.userbot4 = Client(
             name="AnonXAss4",
@@ -89,6 +95,8 @@ class Call(PyTgCalls):
         self.four = PyTgCalls(
             self.userbot4,
             cache_duration=100,
+            stream_quality=HighQualityAudio(),
+            stream_mode=StreamMode().pulse_stream,
         )
         self.userbot5 = Client(
             name="AnonXAss5",
@@ -99,6 +107,8 @@ class Call(PyTgCalls):
         self.five = PyTgCalls(
             self.userbot5,
             cache_duration=100,
+            stream_quality=HighQualityAudio(),
+            stream_mode=StreamMode().pulse_stream,
         )
 
     async def pause_stream(self, chat_id: int):
