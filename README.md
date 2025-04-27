@@ -74,6 +74,34 @@ python -m ZEFMUSIC
 - `/queue` - Show the current queue
 - `/addsudo` - Add a user as sudo (Owner only)
 
+## YouTube Authentication
+
+The system includes a YouTube authentication module that helps manage YouTube cookies for better access to YouTube content. This is particularly useful for handling age-restricted content and improving overall YouTube access.
+
+### Features
+- Automated cookie management
+- Secure cookie storage
+- Login verification
+- Error handling and logging
+
+### Usage
+1. Install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+2. Run the authentication script:
+```bash
+python -m cookies.youtube_auth
+```
+
+3. Follow the on-screen instructions to:
+   - Enter a name for your cookie file
+   - Log in to your YouTube account
+   - Complete the authentication process
+
+The cookies will be saved in the `cookies` directory and can be used by the system for YouTube operations.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
