@@ -1,7 +1,6 @@
 from pyrogram import Client
-
+import asyncio
 import config
-
 from ..logging import LOGGER
 
 assistants = []
@@ -16,6 +15,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING1),
             no_updates=True,
+            max_concurrent_transmissions=1,
+            workers=1,
         )
         self.two = Client(
             name="RadharaniMusic2",
@@ -23,6 +24,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING2),
             no_updates=True,
+            max_concurrent_transmissions=1,
+            workers=1,
         )
         self.three = Client(
             name="RadharaniMusic3",
@@ -30,6 +33,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING3),
             no_updates=True,
+            max_concurrent_transmissions=1,
+            workers=1,
         )
         self.four = Client(
             name="RadharaniMusic4",
@@ -37,6 +42,8 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING4),
             no_updates=True,
+            max_concurrent_transmissions=1,
+            workers=1,
         )
         self.five = Client(
             name="RadharaniMusic5",
@@ -44,122 +51,61 @@ class Userbot(Client):
             api_hash=config.API_HASH,
             session_string=str(config.STRING5),
             no_updates=True,
+            max_concurrent_transmissions=1,
+            workers=1,
         )
 
     async def start(self):
         LOGGER(__name__).info(f"Starting Assistants...")
+        tasks = []
+        
         if config.STRING1:
-            await self.one.start()
-            try:
-                await self.one.join_chat("zefronmusic")
-            except:
-                pass
-            assistants.append(1)
-            try:
-                await self.one.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 1 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
-                )
-                exit()
-            self.one.id = self.one.me.id
-            self.one.name = self.one.me.mention
-            self.one.username = self.one.me.username
-            assistantids.append(self.one.id)
-            LOGGER(__name__).info(f"Assistant Started as {self.one.name}")
-
+            tasks.append(self._start_assistant(self.one, 1))
         if config.STRING2:
-            await self.two.start()
-            try:
-                await self.two.join_chat("zefronmusic")
-            except:
-                pass
-            assistants.append(2)
-            try:
-                await self.two.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 2 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
-                )
-                exit()
-            self.two.id = self.two.me.id
-            self.two.name = self.two.me.mention
-            self.two.username = self.two.me.username
-            assistantids.append(self.two.id)
-            LOGGER(__name__).info(f"Assistant Two Started as {self.two.name}")
-
+            tasks.append(self._start_assistant(self.two, 2))
         if config.STRING3:
-            await self.three.start()
-            try:
-                await self.three.join_chat("zefronmusic")
-            except:
-                pass
-            assistants.append(3)
-            try:
-                await self.three.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 3 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
-                )
-                exit()
-            self.three.id = self.three.me.id
-            self.three.name = self.three.me.mention
-            self.three.username = self.three.me.username
-            assistantids.append(self.three.id)
-            LOGGER(__name__).info(f"Assistant Three Started as {self.three.name}")
-
+            tasks.append(self._start_assistant(self.three, 3))
         if config.STRING4:
-            await self.four.start()
-            try:
-                await self.four.join_chat("zefronmusic")
-            except:
-                pass
-            assistants.append(4)
-            try:
-                await self.four.send_message(config.LOGGER_ID, "Assistant Started")
-            except:
-                LOGGER(__name__).error(
-                    "Assistant Account 4 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
-                )
-                exit()
-            self.four.id = self.four.me.id
-            self.four.name = self.four.me.mention
-            self.four.username = self.four.me.username
-            assistantids.append(self.four.id)
-            LOGGER(__name__).info(f"Assistant Four Started as {self.four.name}")
-
+            tasks.append(self._start_assistant(self.four, 4))
         if config.STRING5:
-            await self.five.start()
+            tasks.append(self._start_assistant(self.five, 5))
+            
+        await asyncio.gather(*tasks)
+
+    async def _start_assistant(self, client, num):
+        try:
+            await client.start()
             try:
-                await self.five.join_chat("zefronmusic")
+                await client.join_chat("zefronmusic")
             except:
                 pass
-            assistants.append(5)
+            assistants.append(num)
             try:
-                await self.five.send_message(config.LOGGER_ID, "Assistant Started")
+                await client.send_message(config.LOGGER_ID, "Assistant Started")
             except:
                 LOGGER(__name__).error(
-                    "Assistant Account 5 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin! "
+                    f"Assistant Account {num} has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
                 )
-                exit()
-            self.five.id = self.five.me.id
-            self.five.name = self.five.me.mention
-            self.five.username = self.five.me.username
-            assistantids.append(self.five.id)
-            LOGGER(__name__).info(f"Assistant Five Started as {self.five.name}")
+                return
+            client.id = client.me.id
+            client.name = client.me.mention
+            client.username = client.me.username
+            assistantids.append(client.id)
+            LOGGER(__name__).info(f"Assistant {num} Started as {client.name}")
+        except Exception as e:
+            LOGGER(__name__).error(f"Failed to start Assistant {num}: {str(e)}")
 
     async def stop(self):
         LOGGER(__name__).info(f"Stopping Assistants...")
-        try:
-            if config.STRING1:
-                await self.one.stop()
-            if config.STRING2:
-                await self.two.stop()
-            if config.STRING3:
-                await self.three.stop()
-            if config.STRING4:
-                await self.four.stop()
-            if config.STRING5:
-                await self.five.stop()
-        except:
-            pass
+        tasks = []
+        if config.STRING1:
+            tasks.append(self.one.stop())
+        if config.STRING2:
+            tasks.append(self.two.stop())
+        if config.STRING3:
+            tasks.append(self.three.stop())
+        if config.STRING4:
+            tasks.append(self.four.stop())
+        if config.STRING5:
+            tasks.append(self.five.stop())
+        await asyncio.gather(*tasks)

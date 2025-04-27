@@ -23,8 +23,7 @@ unidecode
 yt-dlp
 youtube-search
 youtube-search-python
-https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.23.zip
-flask==2.0.1
-pip install selenium colorama
 selenium>=4.18.1
 colorama>=0.4.6
+flask==2.0.1
+https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.23.zip
