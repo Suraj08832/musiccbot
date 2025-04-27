@@ -108,4 +108,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-For support, join our [Telegram Support Group](https://t.me/zefronmusic). 
+For support, join our [Telegram Support Group](https://t.me/zefronmusic).
+
+## Credits
+
+- [Pyrogram](https://github.com/pyrogram/pyrogram) - Telegram MTProto API Client Library for Python
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - A youtube-dl fork with additional features
+- [ZefMusic](https://github.com/Suraj08832/musiccbot) - The original bot this is based on 
