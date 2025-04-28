@@ -8,41 +8,41 @@ from pyrogram import filters
 load_dotenv()
 
 # Get this value from my.telegram.org/apps
-API_ID = int(getenv("API_ID"))
-API_HASH = getenv("API_HASH")
+API_ID = 27359357
+API_HASH = "cf2a75861140ceb746c7796e07cbf1d5"
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN")
+BOT_TOKEN = "6769894527:AAFpwQhGhF5QZBxwYFJGOPxQPPvYz_Hy_Hs"
 
 # Get Your bot username
-BOT_USERNAME = getenv("BOT_USERNAME")
+BOT_USERNAME = "systummusic_bot"
 
 # Get Your repo
-REPO_LINK = getenv("REPO_LINK")
+REPO_LINK = "https://github.com/AnonymousX1025/AnonXMusic"
 
 # Don't Add style font 
-BOT_NAME = getenv("BOT_NAME")
+BOT_NAME = "Systum Music"
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI")
+MONGO_DB_URI = "mongodb://localhost:27017/zefmusic"
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "180"))
+DURATION_LIMIT_MIN = 180
 
 # Chat id of a group for logging bot's activities
-LOGGER_ID = int(getenv("LOGGER_ID"))
+LOGGER_ID = -1001919707080
 
 # Get this value from @CrewMusic_bot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID"))
+OWNER_ID = 6299128233
 
 # Sudo users
-SUDO_USERS = list(map(int, getenv("SUDO_USERS").split()))
+SUDO_USERS = [6299128233]
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO")
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
+UPSTREAM_REPO = "https://github.com/AnonymousX1025/AnonXMusic"
+UPSTREAM_BRANCH = "master"
 GIT_TOKEN = getenv("GIT_TOKEN")
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT")
+SUPPORT_CHANNEL = "https://t.me/FallenAssociation"
+SUPPORT_CHAT = "https://t.me/DevilsHeavenMF"
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", True))

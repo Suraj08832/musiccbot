@@ -1,4 +1,4 @@
-from ZEFMUSIC import app 
+from ZEFMUSIC import app
 import asyncio
 import random
 from pyrogram import Client, filters
@@ -50,6 +50,17 @@ EMOJI = [
 ]
 
 TAGMES = [
+    " **𝐇𝐞𝐲 𝐂𝐨𝐨𝐥 𝐀𝐧𝐠𝐞𝐥 𝐊��𝐡𝐚 𝐇𝐨🤗🥱** ",
+    " **𝐎𝐲𝐞 𝐒𝐨 𝐆𝐲𝐞 𝐊𝐲𝐚 𝐎𝐧𝐥��𝐧𝐞 𝐀𝐚𝐨😊** ",
+    " **𝐕𝐜 𝐂𝐡𝐚𝐥𝐨 𝐁𝐚𝐭𝐞𝐧 𝐊𝐚𝐫𝐭𝐞 𝐇𝐚𝐢𝐧 𝐊𝐮��𝐡 𝐊𝐮𝐜𝐡😃** ",
+    " **𝐀𝐋𝐎𝐊 𝐊𝐡𝐚𝐧𝐚 𝐊𝐡𝐚 𝐋𝐢𝐲𝐞 𝐉𝐢 ..??🥲** ",
+    " **𝐆𝐡𝐚𝐫 𝐌𝐞 𝐒𝐚𝐛 𝐊𝐚𝐢𝐬𝐞 ��𝐚𝐢𝐧 𝐉𝐢🥺** ",
+    " **𝐏𝐭𝐚 𝐇𝐚𝐢 𝐁𝐨𝐡𝐨𝐭 𝐌𝐢𝐬𝐬 𝐊𝐚𝐫 𝐑𝐡𝐢 𝐓𝐡�� 𝐀𝐚𝐩𝐤𝐨🤭** ",
+    " **𝐎𝐲𝐞 𝐇𝐚𝐥 𝐂𝐡𝐚𝐥 𝐊𝐞𝐬�� 𝐇𝐚𝐢..??🤨** ",
+    " **𝐒𝐞𝐭𝐭𝐢𝐧𝐠 𝐊𝐚𝐫𝐰𝐚 𝐃𝐨𝐠𝐞..??🙂** ",
+    " **𝐀𝐚𝐩𝐤𝐚 𝐍𝐚𝐦𝐞 𝐊𝐲�� 𝐡𝐚𝐢..??🥲** ",
+    " **𝐍𝐚𝐬𝐭𝐚 𝐇𝐮𝐚 𝐀𝐚𝐩𝐤𝐚 विधायक जी..??😋** ",
+    " **𝐌𝐞𝐫𝐞 𝐊𝐨 𝐀𝐩𝐧𝐞 𝐆𝐫𝐨𝐮𝐩 𝐌𝐞 𝐀𝐝𝐝 𝐊𝐫 𝐋𝐨😍** ",
     "Hey Cool Angel Kaha Ho🤗🥱",
     "Oye So Gye Kya Online Aao😊",
     "Vc Chalo Baten Karte Hain Kuch Kuch😃",
