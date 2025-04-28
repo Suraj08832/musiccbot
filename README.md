@@ -48,6 +48,10 @@ OWNER_ID=your_telegram_id
 python -m ZEFMUSIC
 ```
 
+### Source Code
+
+The source code is available at: [https://github.com/Suraj08832/musiccbot](https://github.com/Suraj08832/musiccbot)
+
 ### Koyeb Deployment
 
 1. Fork this repository
@@ -98,7 +102,6 @@ python -m cookies.youtube_auth
 3. Follow the on-screen instructions to:
    - Enter a name for your cookie file
    - Log in to your YouTube account
-   - Complete the authentication process
 
 The cookies will be saved in the `cookies` directory and can be used by the system for YouTube operations.
 

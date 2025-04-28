@@ -1,0 +1,11 @@
+2025/04/27-18:18:08.627 dac Recovering log #25
+2025/04/27-18:18:08.629 dac Level-0 table #28: started
+2025/04/27-18:18:08.633 dac Level-0 table #28: 118835 bytes OK
+2025/04/27-18:18:08.639 dac Delete type=0 #25
+2025/04/27-18:18:08.639 dac Delete type=3 #23
+2025/04/27-18:18:11.750 ccc Compacting 1@0 + 1@1 files
+2025/04/27-18:18:11.754 ccc Generated table #30@0: 301 keys, 29770 bytes
+2025/04/27-18:18:11.755 ccc Compacted 1@0 + 1@1 files => 29770 bytes
+2025/04/27-18:18:11.755 ccc compacted to: files[ 0 1 0 0 0 0 0 ]
+2025/04/27-18:18:11.757 ccc Delete type=2 #26
+2025/04/27-18:18:11.757 ccc Delete type=2 #28

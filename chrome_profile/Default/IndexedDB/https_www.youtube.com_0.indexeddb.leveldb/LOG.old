@@ -1,0 +1,12 @@
+2025/04/27-18:15:48.494 4a44 Recovering log #20
+2025/04/27-18:15:48.495 4a44 Level-0 table #24: started
+2025/04/27-18:15:48.497 4a44 Level-0 table #24: 54563 bytes OK
+2025/04/27-18:15:48.502 4a44 Delete type=2 #19
+2025/04/27-18:15:48.502 4a44 Delete type=0 #20
+2025/04/27-18:15:48.502 4a44 Delete type=3 #7
+2025/04/27-18:15:50.153 4cfc Compacting 1@0 + 1@1 files
+2025/04/27-18:15:50.156 4cfc Generated table #26@0: 292 keys, 29401 bytes
+2025/04/27-18:15:50.156 4cfc Compacted 1@0 + 1@1 files => 29401 bytes
+2025/04/27-18:15:50.156 4cfc compacted to: files[ 0 1 0 0 0 0 0 ]
+2025/04/27-18:15:50.157 4cfc Delete type=2 #22
+2025/04/27-18:15:50.157 4cfc Delete type=2 #24

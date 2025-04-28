@@ -43,7 +43,8 @@ def get_git_repo():
     try:
         repo = Repo()
         return repo
-    except:
+    except Exception as e:
+        LOGGER.warning(f"Failed to get git repo: {str(e)}")
         return None
 
 def get_git_remote():
@@ -55,7 +56,8 @@ def get_git_remote():
         if repo:
             return repo.remote("origin")
         return None
-    except:
+    except Exception as e:
+        LOGGER.warning(f"Failed to get git remote: {str(e)}")
         return None
 
 def get_git_branch():
@@ -67,7 +69,8 @@ def get_git_branch():
         if repo:
             return repo.active_branch.name
         return None
-    except:
+    except Exception as e:
+        LOGGER.warning(f"Failed to get git branch: {str(e)}")
         return None
 
 def get_git_commit():
@@ -79,7 +82,8 @@ def get_git_commit():
         if repo:
             return repo.head.commit.hexsha
         return None
-    except:
+    except Exception as e:
+        LOGGER.warning(f"Failed to get git commit: {str(e)}")
         return None
 
 def git():
@@ -98,7 +102,8 @@ def git():
     try:
         repo = Repo()
         LOGGER.info("Git Client Found [VPS DEPLOYER]")
-    except (GitCommandError, InvalidGitRepositoryError):
+    except (GitCommandError, InvalidGitRepositoryError) as e:
+        LOGGER.warning(f"Git repository not found: {str(e)}")
         try:
             repo = Repo.init()
             if "origin" in repo.remotes:
@@ -116,8 +121,8 @@ def git():
             repo.heads[config.UPSTREAM_BRANCH].checkout(True)
             try:
                 repo.create_remote("origin", config.UPSTREAM_REPO)
-            except BaseException:
-                pass
+            except BaseException as e:
+                LOGGER.warning(f"Failed to create remote: {str(e)}")
             nrs = repo.remote("origin")
             nrs.fetch(config.UPSTREAM_BRANCH)
             try:
