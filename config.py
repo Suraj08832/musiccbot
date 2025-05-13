@@ -29,7 +29,7 @@ ASSUSERNAME = getenv("ASSUSERNAME" , "MissYumikoo")
 
 #---------------------------------------------------------------
 #---------------------------------------------------------------
-MONGO_DB_URI = "mongodb+srv://rekhasharma13061990:Ff1apnsaF9MV89G6@cluster0.t86veax.mongodb.net/zefmusic?retryWrites=true&w=majority"
+MONGO_DB_URI = "mongodb+srv://priyasharma15081997ps:ICsv1FisKCbzu1jr@cluster0.dlmd9d9.mongodb.net/"
 #---------------------------------------------------------------
 #---------------------------------------------------------------
 
